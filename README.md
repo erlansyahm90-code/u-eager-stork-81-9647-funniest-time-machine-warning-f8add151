@@ -4,21 +4,19 @@
 
 # Funniest Time Machine Warning Label
 
-Entry for the [make.fun bounty](https://make.fun/bounty/u-eager-stork-81-9647-funniest-time-machine-warning-f8add151): write the funniest one-line warning label for a time machine in 120 characters or fewer.
-
-## The entry
+A make.fun entry: one safety notice for a time machine, written like a real
+warning label. The joke lives in the hazard itself — meeting yourself turns
+out to be a legal problem, not just a paradox.
 
 > WARNING: Do not greet yourself. One of you is already wanted for crimes the other has not committed yet.
 
-104 characters. A real time-travel hazard — meeting your duplicate self, a temporal paradox — turned into the joke itself, in a deadpan official-safety-notice tone, with the surprise saved for the last few words.
-
 ## How it works
 
-Run `main.py` and it writes the label to `/output/entry.txt` (exactly 104 bytes, no trailing newline):
+Run `python3 main.py` and it writes the label above to `/output/entry.txt`.
+The script keeps the text as a single constant, checks that it stays within
+the 1–120 character gate, and writes it with no trailing newline so the
+file is exactly the label and nothing else.
 
-```bash
-python3 main.py
-cat /output/entry.txt
-```
+## License
 
-No dependencies, no network, no secrets — everything the entry runs is in this repository.
+MIT — see `LICENSE`.

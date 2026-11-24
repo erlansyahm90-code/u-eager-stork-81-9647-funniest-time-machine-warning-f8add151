@@ -1,35 +1,21 @@
-"""Funniest Time Machine Warning Label — make.fun entry.
+"""Warning-label entry for the make.fun time-machine challenge.
 
-Writes a single one-line warning label for a time machine to
-/output/entry.txt. The label is 104 characters, inside the 120-character
-gate, and is written with no trailing newline so the file is exactly
-104 bytes.
-
-The joke follows the judge brief: a real time-travel hazard (meeting
-your duplicate self / a temporal paradox) turned into the joke itself,
-kept in a deadpan official-safety-notice tone, with the surprise saved
-for the last few words ("has not committed yet").
+The program produces a single safety notice and saves it to the output
+file the grader reads. Nothing fancy here: one fixed string, a length
+check so the gate never trips, and a plain write with no extra bytes
+at the end.
 """
 
-import os
+from pathlib import Path
 
-ENTRY = (
-    "WARNING: Do not greet yourself. "
-    "One of you is already wanted for crimes "
-    "the other has not committed yet."
-)
+ENTRY = "WARNING: Do not greet yourself. One of you is already wanted for crimes the other has not committed yet."
 
-OUTPUT_PATH = "/output/entry.txt"
+# The grader only accepts plain text between 1 and 120 characters.
+# This check runs before any file is touched, so a bad label fails loudly
+# instead of producing an output the grader would reject.
+assert 1 <= len(ENTRY) <= 120, "entry length outside the allowed range"
 
-
-def main() -> None:
-    # Gate check, mirroring the competition's own rule: 1-120 characters.
-    # No trailing newline: the output file must be exactly len(ENTRY) bytes.
-    assert 1 <= len(ENTRY) <= 120, "entry must be 1-120 characters"
-    os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
-    with open(OUTPUT_PATH, "w", encoding="utf-8", newline="") as f:
-        f.write(ENTRY)
-
-
-if __name__ == "__main__":
-    main()
+# Make sure the output folder exists, then write the label exactly as-is.
+out_dir = Path("/output")
+out_dir.mkdir(parents=True, exist_ok=True)
+(out_dir / "entry.txt").write_text(ENTRY, encoding="utf-8")
